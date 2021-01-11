@@ -1,18 +1,31 @@
 <template>
   <div>
-    <div class="home_header">
-      <Header @switchover="switchover"/>
-    </div>
-    <div class="home_container">
-      <Sidenav :isCollapse="isCollapse" @selectIndex="selectIndex" />
-      <div class="home_main">
-        <el-tabs class="home_mainTop" type="border-card" closable @tab-click='tabClick' @tab-remove='tabRemove' v-model="currentTab">
-          <el-tab-pane lazy v-for="cur in tabList" :key='cur.name' :label="cur.label" :name='cur.name'></el-tab-pane>
+    <el-container>
+      <el-aside width="200px">
+        <Sidenav :isCollapse="isCollapse" @selectIndex="selectIndex" />
+      </el-aside>
+      <el-container>
+        <Header @switchover="switchover"/>
+        <el-main>
+          <el-tabs class="home_mainTop" type="border-card" closable @tab-click='tabClick' @tab-remove='tabRemove' v-model="currentTab">
+            <el-tab-pane lazy v-for="cur in tabList" :key='cur.name' :label="cur.label" :name='cur.name'></el-tab-pane>
             <router-view/>
-        </el-tabs>
-        <p style="color:#ccc;margin:10px auto;text-align: center">歧黄数据统计中心</p>
-      </div>
-    </div>
+          </el-tabs>
+
+        </el-main>
+        <el-footer>
+          <p style="color:#ccc;margin:10px auto;text-align: center">歧黄数据统计中心</p>
+        </el-footer>
+      </el-container>
+    </el-container>
+<!--    <div class="home_header">-->
+
+<!--    </div>-->
+<!--    <div class="home_container">-->
+<!--      <div class="home_main">-->
+
+<!--      </div>-->
+<!--    </div>-->
   </div>
 </template>
 <script>

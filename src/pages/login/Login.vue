@@ -140,6 +140,7 @@ export default {
       this.active=i
     },
     submitForm() {
+      this.$router.push({path: '/home/workbench'})
     },
     //验证码登录
   },

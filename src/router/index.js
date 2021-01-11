@@ -98,9 +98,10 @@ router.beforeEach((to, from, next) => {
         if (token) { // 通过vuex state获取当前的token是否存在
             next()
         } else {
-            next({
-                path: '/',
-            })
+            next()
+            // next({
+            //     path: '/',
+            // })
         }
     } else {
         next()

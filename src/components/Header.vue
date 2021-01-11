@@ -106,7 +106,6 @@ export default {
 
 <style lang="scss" scoped>
 .Head-wrap {
-  height: 100%;
   padding: 0 30px;
   display: flex;
   align-items: center;

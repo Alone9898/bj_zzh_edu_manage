@@ -1,15 +1,7 @@
 <template>
   <div class="Head-wrap">
     <div>
-      <p class="textCor">歧黄数据统计中心</p>
-      <div class="switchBox">
-        <el-tooltip v-if="!isCollapse" class="item" effect="dark" content="收起导航栏" placement="bottom">
-          <i  class="el-icon-s-fold textCor" @click="switchover(true)"></i>
-        </el-tooltip>
-        <el-tooltip v-if="isCollapse" class="item" effect="dark" content="展开导航栏" placement="bottom">
-          <i  class="el-icon-s-unfold textCor" @click="switchover(false)"></i>
-        </el-tooltip>
-      </div>
+      <p class="textCor">知识付费系统</p>
     </div>
     <div>
       <el-dropdown @command="fullScreen">
@@ -41,10 +33,6 @@ export default {
     };
   },
   methods: {
-    switchover(i) {
-      this.isCollapse = i
-      this.$emit('switchover', i)
-    },
     tologOut() {
       this.axios
           .post("platform/login/logout")
@@ -106,21 +94,16 @@ export default {
 
 <style lang="scss" scoped>
 .Head-wrap {
-  padding: 0 30px;
   display: flex;
-  align-items: center;
+  background-color: white;
+  height: 56px;
+  padding: 0 20px;
+  box-sizing: border-box;
   justify-content: space-between;
+  align-items: center;
   .textCor{
     color: #000;
   }
-  .switchBox {
-    font-size: 24px;
-    color: white;
-    height: 24px;
-    margin-left: 5px;
-    cursor: pointer;
-  }
-
   & > div:nth-child(1) {
     display: flex;
     align-items: center;
@@ -132,7 +115,7 @@ export default {
     }
 
     p {
-      font-size: 18px;
+      font-size: 20px;
       font-weight: 700;
     }
   }

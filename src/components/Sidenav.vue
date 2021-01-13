@@ -1,12 +1,11 @@
 <template>
-  <div class="home_aside" :style="!isCollapse?{width: 180+'px',}:''">
+  <div class="home_aside">
     <el-menu
         class="el-menu-vertical-demo"
-        background-color="#415348"
+        background-color="#273043"
         text-color="#c1c1c1"
-        active-text-color="#99e880"
+        active-text-color="#fff"
         router
-        :collapse="isCollapse"
         :unique-opened="true"
         @select="selectIndex"
         style="border-right: 1px #415348 solid"
@@ -43,12 +42,6 @@ export default {
       menuList: [],
       nav1: require("@/assets/nav0.svg"),
     };
-  },
-  props: ['isCollapse'],
-  watch : {
-    'isCollapse':function (val){
-      console.log(val)
-    }
   },
   created() {
     this.getList();
@@ -97,12 +90,14 @@ export default {
 <style lang="scss" scoped>
 .home_aside {
   transition: 1.5s;
-  height: calc(100vh - 60px);
+  width: 180px;
+  height: 100vh;
   overflow: scroll;
-  background: #415348;
+  background: #273043;
 
   .el-menu-item.is-active {
-    background: rgb(52, 66, 58) !important;
+    background: #f5f6f9!important;
+    color: #273043!important;
   }
 }
 
@@ -111,7 +106,7 @@ export default {
   display: none;
 }
 .el-menu-item.is-active {
-  background-color: rgb(52, 66, 58) !important;
+  background-color: #f5f6f9 !important;
 }
 </style>
 <style>

@@ -76,17 +76,25 @@
                   @keydown.enter.native="submitForm('ruleForm')"
               ></el-input>
             </el-form-item>
-            <el-form-item prop="pass" label="密码">
-              <div class="between flex">
-                <el-input
-                    type="password"
-                    show-password
-                    v-model="ruleForm.pass"
-                    placeholder="请输入密码"
-                    @keydown.enter.native="submitForm('ruleForm')"
+            <el-form-item prop="verificationCode">
+              <el-input
+                  v-model="ruleForm.verificationCode"
+                  type="text"
+                  placeholder="短信验证码"
+                  autocomplete="off"
+                  clearable
+                  maxlength="6"
+                  size="medium"
+              >
+                <el-button
+                    slot="suffix"
+                    type="text"
+                    class="send-code"
+                    :disabled="disabledSendVerifyBtn"
+                    @click="sendVerifyCode"
                     size="medium"
-                ></el-input>
-              </div>
+                >{{ sendVerifyBtnText }}</el-button>
+              </el-input>
             </el-form-item>
           </el-form>
         </div>
@@ -129,9 +137,25 @@ export default {
       rules: {
         phone: [{required: true, trigger: "blur", message: "请输入您的手机号/帐号"}],
         pass: [{required: true, message: "请输入密码", trigger: "blur"}],
+        verificationCode: [
+          { required: true, message: "请输入验证码", trigger: "blur" },
+        ],
       },
-      active:1
+      active:1,
+      remainTimes:0,
     };
+  },
+  computed: {
+    disabledSendVerifyBtn: function () {
+      return this.remainTimes > 0;
+    },
+    sendVerifyBtnText: function () {
+      if (this.remainTimes > 0) {
+        return "重新发送" + this.remainTimes + "s";
+      } else {
+        return "发送验证码";
+      }
+    },
   },
   mounted() {
   },
@@ -139,8 +163,46 @@ export default {
     tab(i){
       this.active=i
     },
+    //发送验证码
+    sendVerifyCode() {
+      this.$message.success("验证码已发送"), this.startTimer(120);
+      const telephone = this.ruleForm.telephone;
+      if (telephone !== "" && isPhone(telephone)) {
+        // 发送验证码
+        let data = {
+          msg_type: 1,
+          phone: telephone,
+        };
+        const loading = this.$loading();
+        this.axios
+            .post("store/Platform/sendMsg", data)
+            .then((res) => {
+              // 弹框提示
+              if (res.code === 0) {
+                this.$message.success("验证码已发送"), this.startTimer(120);
+              }
+            })
+
+            .finally(() => {
+              loading.close();
+            });
+      } else {
+        this.$refs.ruleForm.validateField("telephone");
+      }
+    },
+    //验证码倒计时
+    startTimer(times) {
+      this.remainTimes = times;
+      let setInterval = window.setInterval(() => {
+        if (this.remainTimes > 0) {
+          this.remainTimes--;
+        } else {
+          window.clearInterval(setInterval);
+        }
+      }, 1000);
+    },
     submitForm() {
-      this.$router.push({path: '/home/workbench'})
+      this.$router.push('/home/workbench')
     },
     //验证码登录
   },

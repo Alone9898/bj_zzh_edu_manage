@@ -8,7 +8,7 @@
 
 export default [{
     module_id: 3,
-    module_name: "医生统计",
+    module_name: "店铺管理",
     icon:"el-icon-user",
     index: "5",
     list: [
@@ -38,7 +38,7 @@ export default [{
     // },
      {
         module_id: 3,
-        module_name: "订单统计",
+        module_name: "直播管理",
         icon:"el-icon-document",
         index: "3",
         list: [{

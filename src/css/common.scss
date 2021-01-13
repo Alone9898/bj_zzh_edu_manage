@@ -22,7 +22,7 @@ html {
 }
 
 body {
-  color: #666;
+  color: #999999;
   font-size: 14px;
   background: #f0f3f7;
 }
@@ -47,10 +47,6 @@ p {
 
 .flex {
   display: flex;
-}
-
-.gray {
-  color: #aaaaaa;
 }
 
 .column {
@@ -78,7 +74,30 @@ p {
 .wrap {
   flex-wrap: wrap;
 }
-
+.pd0{
+  padding: 0;
+}
+.mb8{
+  margin-bottom: 8px;
+}
+.mb16{
+  margin-bottom: 16px;
+}
+.mb22{
+  margin-bottom: 22px;
+}
+.fs24{
+  font-size: 24px;
+}
+.fs36{
+  font-size: 36px;
+}
+.bgWhite {
+  background: white;
+}
+.gray {
+  color: #333;
+}
 .red {
   color: #fe6538;
 }
